@@ -32,9 +32,9 @@ const Menu = () => {
         {
           products.length > 0 ? (
             products
-              .filter((product) => category === "All" || category === product.category).map((product) => (
-                <div key={product.id} className='flex items-center gap-6 p-4 border border-gray-100 rounded-xl shadow-sm transition hover:shadow-md'>
-                  <img src={product.image} alt={product.name} className='w-30 h-30 object-cover rounded-full' />
+              .filter((product) => category === "All" || category === product.category).map((product,index) => (
+                <div key={index} className='flex items-center gap-6 p-4 border border-gray-100 rounded-xl shadow-sm transition hover:shadow-md'>
+                  <img  src={`http://localhost:4000/menu_images/${product.Image}`} alt={product.name} className='w-30 h-30 object-cover rounded-full' />
                   <div className='flex-1'>
                     <div className='flex justify-between items-center'>
                       <h3 className='text-lg font-semibold text-gray-800'>{product.name}</h3>

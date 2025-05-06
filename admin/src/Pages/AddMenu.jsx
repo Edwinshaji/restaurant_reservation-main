@@ -24,10 +24,10 @@ const onSubmitHandler = async (e) => {
     formData.append('description', description)
     formData.append('category', category)
     formData.append('price', price)
-
+    
     if(image) formData.append('image', image)
     
-      const response = await axios.post(`${backendUrl}/api/menu/add`, formData, {headers:{token}})
+      const response = await axios.post(`${backendUrl}/api/product/add`, formData, {headers:{token}})
       if (response.data.success){
         toast.success('Menu Added Successfully')
         setName('')
@@ -53,13 +53,13 @@ const onSubmitHandler = async (e) => {
 
   return (
     <div>
-     <form onSubmit={onSubmitHandler} className='flex flex-col items-start  gap-1' >
+     <form onSubmit={onSubmitHandler} className='flex flex-col items-start  gap-1' encType="multipart/form-data" >
       <div>
-        <p>Upload Image</p>
+        <p className='text-[22px]'>Upload Image</p>
         <div>
           <label htmlFor="image">
-            <img src={! image ? upload_img:URL.createObjectURL(image)} alt='' />
-            <input onChange={(e)=> setImage(e.target.files[0])} type="file"id="image" hidden />
+            <img src={! image ? "+":URL.createObjectURL(image)} alt='' />
+            <input onChange={(e)=> setImage(e.target.files[0])} type="file"id="image"/>
 
           </label>
         </div>

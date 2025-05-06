@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { backendUrl } from '../App'
+import axios from 'axios';
+import {toast} from 'react-toastify';
 
 const AdminTable = () => {
   const[reservation, setReservation] = useState([])
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${backendUrl}/api/reservation/delete/${id}`)
+      await axios.delete(`${backendUrl}/api/reservations/delete/${id}`)
       toast.success('Reservation deleted successfully')
     } catch (error) {
       console.log('Error deleting reservation:')
-      
-     
     }
   }
 
@@ -18,13 +18,11 @@ const AdminTable = () => {
   useEffect(()=> {
     const fetchReservation = async () => {
       try {
-        const response = await axios.get(backendUrl + '/api/reservation/get')
+        const response = await axios.get(backendUrl + '/api/reservations/get')
         setReservation(response.data)
         console.log(response.data)
       } catch (error) {
         console.log("Error fetching reservation data:");
-        
-        
       }
     }
     fetchReservation()
@@ -62,9 +60,9 @@ const AdminTable = () => {
                   <td className='p-3'>{res.phone}</td>
                   <td className='p-3'>{res.date}</td>
                   <td className='p-3'>{res.time}</td>
-                  <td className='p-3'>{res.guest}</td>
+                  <td className='p-3'>{res.guests}</td>
                   <td className='p-3'>
-                    <button onClick={(handleDelete(res._id))} className='bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600'>Delete</button>
+                    <button onClick={()=>handleDelete(res._id)} className='bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600'>Delete</button>
                     </td>
 
                 </tr>
